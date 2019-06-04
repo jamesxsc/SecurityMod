@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "security",
+  "version": "${version}",
+
+  "name": "Security Mod",
+  "description": "1.14 Security Mod. Cameras, tripwires and more!",
+  "authors": [
+    "James Conway"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": "https://github.com/jamesxsc/SecurityMod"
+  },
+
+  "license": "Apache 2.0",
+  "icon": "assets/security/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "uk.co.xsc.securitymod.SecurityMod"
+    ]
+  },
+  "mixins": [
+
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
