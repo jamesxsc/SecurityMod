@@ -1,0 +1,10 @@
+{
+  "variants": {
+      "facing=up": { "model": "" },
+      "facing=down": { "model": "" },
+      "facing=north": { "model": "" },
+      "facing=south": { "model": "" },
+      "facing=east": { "model": "" },
+      "facing=west": { "model": "" }
+    }
+}

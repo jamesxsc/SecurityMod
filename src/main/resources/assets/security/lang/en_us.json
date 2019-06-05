@@ -1,3 +1,7 @@
 {
-  "block.security.camera_block": "Security Camera"
+  "block.security.camera_mechanical_block": "Security Camera",
+  "block.security.camera_analog_block": "Security Camera",
+  "block.security.camera_transistor_block": "Security Camera",
+  "block.security.camera_silicon_block": "Security Camera",
+  "block.security.camera_quantum_block": "Security Camera"
 }

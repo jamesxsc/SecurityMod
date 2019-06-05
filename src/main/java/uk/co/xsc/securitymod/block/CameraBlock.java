@@ -3,6 +3,8 @@ package uk.co.xsc.securitymod.block;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -13,6 +15,7 @@ import net.minecraft.world.BlockView;
 import uk.co.xsc.securitymod.block.blockentity.CameraBlockEntity;
 import uk.co.xsc.securitymod.block.enums.ElectronicTier;
 import uk.co.xsc.securitymod.block.enums.SecurityProperties;
+import uk.co.xsc.securitymod.util.TierUtil;
 
 import static uk.co.xsc.securitymod.Constants.MOD_ID;
 
@@ -26,9 +29,21 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider {
         ELECTRONIC_TIER = SecurityProperties.ELECTRONIC_TIER;
     }
 
-    public CameraBlock() {
-        super(FabricBlockSettings.of(Material.METAL).breakInstantly().drops(new Identifier(MOD_ID, "camera_block")).build());
-        this.setDefaultState(this.getStateFactory().getDefaultState().with(FACING, Direction.NORTH).with(ELECTRONIC_TIER, ElectronicTier.MECHANICAL));
+    private final ElectronicTier tier;
+
+    public CameraBlock(ElectronicTier tier) {
+        super(FabricBlockSettings.of(Material.METAL).breakInstantly().drops(new Identifier(MOD_ID, "camera_" + tier.asString() + "_block")).build());
+        System.out.println(tier.asString());
+        System.out.println(this.getDropTableId().getPath());
+        System.out.println(this.getDropTableId().getNamespace());
+        this.tier = tier;
+        this.setDefaultState(this.getStateFactory().getDefaultState().with(FACING, Direction.NORTH).with(ELECTRONIC_TIER, this.tier));
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext itemPlacementContext_1) {
+        Direction direction = itemPlacementContext_1.getPlayerFacing();
+        return this.getDefaultState().with(FACING, direction).with(ELECTRONIC_TIER, this.tier);
     }
 
     @Override
@@ -55,4 +70,10 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider {
     public BlockEntity createBlockEntity(BlockView blockView) {
         return new CameraBlockEntity();
     }
+
+    @Override
+    public Item asItem() {
+        return TierUtil.asItem(this, tier);
+    }
+
 }
