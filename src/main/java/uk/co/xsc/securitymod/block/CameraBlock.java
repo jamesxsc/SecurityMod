@@ -31,10 +31,10 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider {
         this.setDefaultState(this.getStateFactory().getDefaultState().with(FACING, Direction.NORTH).with(ELECTRONIC_TIER, ElectronicTier.MECHANICAL));
     }
 
-//    @Override
-//    protected void appendProperties(StateFactory.Builder<Block, BlockState> stateBuilder) {
-//        stateBuilder.add(FACING, ELECTRONIC_TIER);
-//    }
+    @Override
+    protected void appendProperties(StateFactory.Builder<Block, BlockState> stateBuilder) {
+        stateBuilder.add(FACING, ELECTRONIC_TIER);
+    }
 
     @Override
     public BlockRenderLayer getRenderLayer() {

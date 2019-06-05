@@ -7,7 +7,7 @@ public class SecurityProperties {
     public static final EnumProperty<ElectronicTier> ELECTRONIC_TIER;
 
     static {
-        ELECTRONIC_TIER = EnumProperty.create("electronic-tier", ElectronicTier.class);
+        ELECTRONIC_TIER = EnumProperty.create("electronic_tier", ElectronicTier.class);
     }
 
 }
