@@ -19,7 +19,7 @@ public class TierUtil {
 
     public static Item asItem(Block block, ElectronicTier tier) {
         BlockItem blockItem = new BlockItem(block, new Item.Settings().itemGroup(ItemGroup.BREWING)) {
-            
+
             private final ElectronicTier electronicTier = tier;
 
             @Override
