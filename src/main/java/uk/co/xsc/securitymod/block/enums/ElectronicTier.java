@@ -16,12 +16,12 @@ public enum ElectronicTier implements net.minecraft.util.StringIdentifiable {
 
     @Override
     public String asString() {
-        return null;
+        return string;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return string;
     }
 
 }
