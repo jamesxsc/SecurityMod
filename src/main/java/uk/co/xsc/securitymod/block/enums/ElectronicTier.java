@@ -20,6 +20,7 @@ public enum ElectronicTier implements net.minecraft.util.StringIdentifiable {
         this.displayName = displayName;
     }
 
+    @Deprecated
     public static ElectronicTier getFromDamage(int damage) {
         switch (damage) {
             case 0:

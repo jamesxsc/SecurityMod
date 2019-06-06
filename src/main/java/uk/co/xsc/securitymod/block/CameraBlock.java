@@ -3,6 +3,7 @@ package uk.co.xsc.securitymod.block;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateFactory;
@@ -15,11 +16,12 @@ import net.minecraft.world.BlockView;
 import uk.co.xsc.securitymod.block.blockentity.CameraBlockEntity;
 import uk.co.xsc.securitymod.block.enums.ElectronicTier;
 import uk.co.xsc.securitymod.block.enums.SecurityProperties;
+import uk.co.xsc.securitymod.util.INetworkDevice;
 import uk.co.xsc.securitymod.util.TierUtil;
 
 import static uk.co.xsc.securitymod.Constants.MOD_ID;
 
-public class CameraBlock extends FacingBlock implements BlockEntityProvider {
+public class CameraBlock extends FacingBlock implements BlockEntityProvider, INetworkDevice {
 
     public static final DirectionProperty FACING;
     public static final EnumProperty<ElectronicTier> ELECTRONIC_TIER;
@@ -74,6 +76,21 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider {
     @Override
     public Item asItem() {
         return TierUtil.asItem(this, tier);
+    }
+
+    @Override
+    public boolean receives() {
+        return false;
+    }
+
+    @Override
+    public boolean transmits() {
+        return false;
+    }
+
+    @Override
+    public Screen getConfigurationScreen() {
+        return null;
     }
 
 }

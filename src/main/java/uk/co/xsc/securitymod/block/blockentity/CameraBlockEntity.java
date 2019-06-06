@@ -1,26 +1,36 @@
 package uk.co.xsc.securitymod.block.blockentity;
 
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.state.property.EnumProperty;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.gui.screen.Screen;
 import uk.co.xsc.securitymod.registry.SecurityBlockEntities;
 import uk.co.xsc.securitymod.util.INetworkDevice;
 
-public class CameraBlockEntity extends BlockEntity implements INetworkDevice {
+public class CameraBlockEntity extends BlockEntity {
 
     public CameraBlockEntity() {
         super(SecurityBlockEntities.CAMERA_BLOCK_ENTITY);
+        pan = 0;
+        tilt = 0;
     }
 
-    @Override
-    public boolean receives() {
-        // for control data
-        return true;
+    public CameraBlockEntity(BlockEntityType<?> blockEntityType_1) {
+        super(blockEntityType_1);
     }
 
-    @Override
-    public boolean transmits() {
-        // for video data
-        return true;
+    public void takeSnapshot() {
+        getWorld().rayTraceBlock(null, null, null, null, null);
+    }
+
+    private int pan;
+    private int tilt;
+
+    public int getPan() {
+        return pan;
+    }
+
+    public int getTilt() {
+        return tilt;
     }
 
 }
