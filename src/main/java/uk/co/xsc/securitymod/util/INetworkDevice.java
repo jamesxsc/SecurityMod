@@ -1,5 +1,6 @@
 package uk.co.xsc.securitymod.util;
 
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.gui.screen.Screen;
 
 public interface INetworkDevice {
@@ -8,7 +9,7 @@ public interface INetworkDevice {
 
     boolean transmits();
 
-    Screen getConfigurationScreen();
+    Screen getConfigurationScreen(BlockEntity blockEntity);
 
     default void onReceive() {}
 

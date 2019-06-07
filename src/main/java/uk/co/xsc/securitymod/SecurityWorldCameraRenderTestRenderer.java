@@ -162,13 +162,13 @@ public class SecurityWorldCameraRenderTestRenderer implements AutoCloseable, Syn
         GLFWErrorCallback gLFWErrorCallback_1 = GLFW.glfwSetErrorCallback((int_1, long_1) -> {
             list_1.add(String.format("GLFW error during init: [0x%X]%s", int_1, long_1));
         });
-//        if (!GLFW.glfwInit()) {
-//            throw new IllegalStateException("Failed to initialize GLFW, errors: " + Joiner.on(",").join(list_1));
-//        }
-//        System.out.println("Calling my glfw");
-//        long glfwWindow = GLFW.glfwCreateWindow(800, 800, "Test Camera", 0, 0);
-//        GLFW.glfwMakeContextCurrent(glfwWindow);
-//        GLFW.glfwShowWindow(glfwWindow);
+        if (!GLFW.glfwInit()) {
+            throw new IllegalStateException("Failed to initialize GLFW, errors: " + Joiner.on(",").join(list_1));
+        }
+        System.out.println("Calling my glfw");
+        long glfwWindow = GLFW.glfwCreateWindow(800, 800, "Test Camera", 0, 0);
+        GLFW.glfwMakeContextCurrent(glfwWindow);
+        GLFW.glfwShowWindow(glfwWindow);
         this.frameBuffer = null;//new GlFramebuffer(800, 800, true, SystemUtil.getOperatingSystem() == SystemUtil.OperatingSystem.MAC);
         this.entityRenderDispatcher = client.getEntityRenderManager();
         this.textureManager = client.getTextureManager();

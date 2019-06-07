@@ -4,6 +4,7 @@ import net.minecraft.ChatFormat;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -40,7 +41,10 @@ public class Cat9GConfigToolItem extends Item {
                                 itemUsageContext_1.getBlockPos(), null, itemUsageContext_1.getPlayer(), is);
                     }
                 } else {
-
+                    if (((INetworkDevice) blockState.getBlock()).getConfigurationScreen(itemUsageContext_1.getWorld().getBlockEntity(itemUsageContext_1.getBlockPos())) != null) {
+                        MinecraftClient.getInstance().openScreen(((INetworkDevice) blockState.getBlock()).getConfigurationScreen(
+                                itemUsageContext_1.getWorld().getBlockEntity(itemUsageContext_1.getBlockPos())));
+                    }
                 }
             }
         }
