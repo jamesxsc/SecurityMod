@@ -27,6 +27,7 @@ public class CameraBlockEntity extends BlockEntity {
         super(blockEntityType_1);
     }
 
+    //W.I.P.
     public void takeSnapshot() {
         getWorld().rayTraceBlock(null, null, null, null, null);
     }
