@@ -13,7 +13,6 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.network.chat.BaseComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
@@ -29,7 +28,6 @@ import uk.co.xsc.securitymod.block.enums.ElectronicTier;
 import uk.co.xsc.securitymod.block.enums.SecurityProperties;
 import uk.co.xsc.securitymod.util.*;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -49,9 +47,6 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
 
     public CameraBlock(ElectronicTier tier) {
         super(FabricBlockSettings.of(Material.METAL).breakInstantly().drops(new Identifier(MOD_ID, "camera_" + tier.asString() + "_block")).build());
-        System.out.println(tier.asString());
-        System.out.println(this.getDropTableId().getPath());
-        System.out.println(this.getDropTableId().getNamespace());
         this.tier = tier;
         this.setDefaultState(this.getStateFactory().getDefaultState().with(FACING, Direction.NORTH).with(ELECTRONIC_TIER, this.tier));
     }
@@ -189,7 +184,7 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
 
                 //network settings
                 int addressBoxWidth = 27;
-                int[] oldAddressValues = ArrayUtil.intFromStr(((CameraBlockEntity) blockEntity).getAddress().split("\\."), false);
+                int[] oldAddressValues = ArrayUtil.intFromStr(((CameraBlockEntity) blockEntity).getAddress().split("\\."), false, true);
 
                 addressBox1 = new FilteredTextFieldWidget(this.font, this.width / 2 - (addressBoxWidth * 2 + 5), baseY + 132, addressBoxWidth, 15, "",
                         (Predicate<String>) s -> s.matches("^[0-9]*$"));
@@ -220,7 +215,7 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
                 this.addButton(addressBox3);
                 this.addButton(addressBox4);
 
-                int[] oldScopeValues = ArrayUtil.intFromStr(((CameraBlockEntity) blockEntity).getScope().split("\\."), true);
+                int[] oldScopeValues = ArrayUtil.intFromStr(((CameraBlockEntity) blockEntity).getScope().split("\\."), true, true);
 
                 scopeBox1 = new FilteredTextFieldWidget(this.font, this.width / 2 - (addressBoxWidth * 2 + 5), baseY + 164, addressBoxWidth, 15, "",
                         s -> s.matches("^[xX0-9]*$"));
