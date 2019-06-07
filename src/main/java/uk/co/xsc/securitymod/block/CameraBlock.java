@@ -8,6 +8,7 @@ import net.minecraft.ChatFormat;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.NarratorManager;
@@ -103,6 +104,12 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
     public Screen getConfigurationScreen(BlockEntity cameraBlockEntity) {
         Screen screen = new Screen(NarratorManager.EMPTY) {
 
+            // to remove shadow
+            @Override
+            public void drawCenteredString(TextRenderer textRenderer_1, String string_1, int int_1, int int_2, int int_3) {
+                textRenderer_1.draw(string_1, (float)(int_1 - textRenderer_1.getStringWidth(string_1) / 2), (float)int_2, int_3);
+            }
+
             private final BlockEntity blockEntity;
             private int sliderWidth = 150;
             private int baseY;
@@ -146,8 +153,8 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
 
             {
                 this.blockEntity = cameraBlockEntity;
-                setSize(192, 192);
-                baseY = (MinecraftClient.getInstance().window.getHeight() / 4) - (this.height / 2) - 12;
+                setSize(192, 218);
+                baseY = (MinecraftClient.getInstance().window.getHeight() / 4) - (this.height / 2) + 9;
                 windowHeight = MinecraftClient.getInstance().window.getHeight();
             }
 
@@ -280,26 +287,30 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
                     MinecraftClient.getInstance().openScreen(null);
                     return;
                 }
-                Identifier BG_TEX = new Identifier(MOD_ID, "textures/gui/networked/icon.png");
+                Identifier BG_TEX = new Identifier(MOD_ID, "textures/gui/networked/camera_block.png");
                 this.renderBackground();
                 GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
                 Objects.requireNonNull(this.minecraft).getTextureManager().bindTexture(BG_TEX);
                 int int_3 = (this.width - 192) / 2;
-                int int_4 = (this.height - 192) / 2;
-                this.blit(int_3, int_4, 0, 0, 192, 192);
-                this.drawCenteredString(this.font, new TextComponent("Device Settings").setStyle(new Style().setUnderline(true)).getFormattedText(), this.width / 2, baseY + 15, 16777215);
-                this.drawCenteredString(this.font, new TextComponent("Pan").getFormattedText(), this.width / 2, baseY + 30, 16777215);
-                this.drawCenteredString(this.font, new TextComponent("Tilt").getFormattedText(), this.width / 2, baseY + 65, 16777215);
+                int int_4 = (this.height - 218) / 2;
+                this.blit(int_3, int_4, 0, 0, 192, 218);
+
+                this.drawCenteredString(this.font, getTitle().getFormattedText(), this.width / 2, baseY - 2, 4210752);
+                this.drawCenteredString(this.font, new TextComponent("CAT9 Settings").setStyle(new Style().setBold(true)).getFormattedText(), this.width / 2, baseY + 7, 4210752);
+
+                this.drawCenteredString(this.font, new TextComponent("Device Settings").setStyle(new Style().setUnderline(true)).getFormattedText(), this.width / 2, baseY + 17, 4210752);
+                this.drawCenteredString(this.font, new TextComponent("Pan").getFormattedText(), this.width / 2, baseY + 30, 4210752);
+                this.drawCenteredString(this.font, new TextComponent("Tilt").getFormattedText(), this.width / 2, baseY + 65, 4210752);
 
                 //network settings
                 this.drawCenteredString(this.font, new TextComponent("Network Settings").setStyle(new Style().setUnderline(true))
-                        .getFormattedText(), this.width / 2, baseY + 105, 16777215);
+                        .getFormattedText(), this.width / 2, baseY + 107, 4210752);
                 this.drawCenteredString(this.font, new TextComponent("Device Address")
                         .append(addressValidity())
-                        .getFormattedText(), this.width / 2, baseY + 120, 16777215);
+                        .getFormattedText(), this.width / 2, baseY + 120, 4210752);
                 this.drawCenteredString(this.font, new TextComponent("Scope")
                         .append(scopeValidity())
-                        .getFormattedText(), this.width / 2, baseY + 152, 16777215);
+                        .getFormattedText(), this.width / 2, baseY + 152, 4210752);
 
                 super.render(int_1, int_2, float_1);
             }
@@ -312,7 +323,7 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
 
             @Override
             public Component getTitle() {
-                return new TextComponent("Security Camera - Network Settings").setStyle(new Style().setBold(true));
+                return new TextComponent("Security Camera:").setStyle(new Style().setBold(true));
             }
         };
         return screen;
