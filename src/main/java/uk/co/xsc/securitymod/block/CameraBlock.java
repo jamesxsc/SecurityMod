@@ -158,6 +158,11 @@ public class CameraBlock extends FacingBlock implements BlockEntityProvider, INe
                 windowHeight = MinecraftClient.getInstance().window.getHeight();
             }
 
+            @Override
+            public boolean isPauseScreen() {
+                return false;
+            }
+
             @SuppressWarnings("PointlessArithmeticExpression")
             @Override
             public void init() {
